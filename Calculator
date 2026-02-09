@@ -1,0 +1,84 @@
+HISTORY_FILE="history.txt"
+
+
+def show_history():
+  f= open(HISTORY_FILE,'r')
+  lines= f.readlines()
+  if len(lines)==0:
+    print("No history found!")
+  else:
+    for line in reversed(lines):
+       print(line.strip())
+  f.close()
+
+
+def clear_history():
+  f=open(HISTORY_FILE,'w')
+  f.close()
+  print("History cleared!")
+
+
+def save_to_history(equation, result):
+  f= open(HISTORY_FILE,'a')
+  f.write(equation+"="+ str(result)+"\n")
+  f.close()
+
+
+def calculate(user_input):
+  parts= user_input.split()
+  if len(parts)!= 3:
+    print("Invalid input! use format: Number Operator 
+Number (e.g. 8+2)")
+    return
+
+
+  n1=float(parts[0])
+  op= parts[1]
+  n2=float(parts[2])
+
+
+  if op == "+":
+    result = n1+n2
+  elif op == "-":
+    result = n1-n2
+  elif op == "*":
+    result = n1*n2
+  elif op == "/":
+    if n2 == 0:
+      print("Error! cannot divide by zero")
+    result = n1/n2
+  else:
+    print("Invalid operator!  Use only +,-,*,/")
+    return
+
+
+  if int(result)== result:
+    result = int(result)
+  print("Result:", result)
+  save_to_history(user_input, result)
+
+
+def main():
+  print("___SIMPLE CALCULATOR___")
+  while True:
+    user_input= input("Enter calculation (+ , _ , 
+*, /) or command (history, clear, exit):")
+    if user_input =='exit':
+      print("Goodbye!")
+      break
+    elif user_input == 'history':
+      show_history()
+    elif user_input =='clear':
+      clear_history()
+    else:
+      calculate(user_input)
+
+
+main()
+
+
+
+
+
+
+  
