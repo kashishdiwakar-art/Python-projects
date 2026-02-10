@@ -56,3 +56,5 @@ while True:
 
 print("\nThank you for using the headline generator. Have a great day!")
 
+print("Have a good day!!!")
+
